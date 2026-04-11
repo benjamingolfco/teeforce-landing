@@ -6,22 +6,52 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 Marketing landing page for **Teeforce**, a tee sheet / course management platform for golf courses (a Benjamin Golf Co product). Pitches automatic waitlist filling, Square POS integration, grill & bar management, and inventory tracking.
 
-## Architecture
+## Stack
 
-**Single-file static site.** Everything — markup, CSS, and JavaScript — lives in `index.html`. There is no build system, no package manager, no framework, no tests, and no dependencies beyond Google Fonts (Inter + DM Serif Display) loaded via `<link>`.
+React 19 + Vite 8 + TypeScript + Tailwind v4 + `motion` (Framer Motion) + `lenis` (smooth scroll). Package manager is **pnpm** (lockfile v9). Single-page app, single route, no router.
 
-**Deployment:** GitHub Pages from the `main` branch, served at `teeforce.golf` via the `CNAME` file. Any push to `main` publishes.
+- `src/main.tsx` — entrypoint, mounts `<App />`
+- `src/App.tsx` — the entire landing page as a handful of section components (`Nav`, `Hero`, `AutoFillScene`, `Problem`, `Features`, `HowItWorks`, `Waitlist`, `Footer`) plus a reusable `TeeforceWordmark` component
+- `src/index.css` — Tailwind v4 config + base styles. **Design tokens live in the `@theme` block here** (colors, font families, custom utilities). Edit tokens here rather than hardcoding hex values elsewhere.
+- `index.html` — Vite HTML entry with Google Fonts link (Fraunces, Inter, Instrument Sans, JetBrains Mono)
+- `public/CNAME` — `teeforce.golf` custom domain, copied into `dist/` on build
 
-**Constraints this creates:**
-- Keep CSS and JS inline in `index.html`. Don't split into separate files or introduce a bundler — the whole point is zero-build GitHub Pages hosting. If tooling is ever added, it should be an explicit decision, not drive-by.
-- No external JS libraries. The existing script is ~20 lines of vanilla JS for smooth-scroll anchors and the waitlist form handler.
-- Design tokens (colors, etc.) live in CSS custom properties under `:root` in the `<style>` block — edit those rather than hardcoding hex values elsewhere.
+## Tailwind v4 notes (non-obvious)
+
+This project uses Tailwind v4's `@theme` directive, not a `tailwind.config.js`. There is **no** config file. Color tokens declared in `src/index.css` under `@theme` automatically generate Tailwind utilities (`--color-brass` → `bg-brass`, `text-brass`, etc.). Same for `--font-*` tokens.
+
+## Brand palette
+
+See `src/index.css` `@theme` block for the canonical values. Semantic usage:
+
+- **Fern** (token: `brass`) — identity accent. Chapter labels, hairlines, italic display highlights, logo "force" text, filled tee-sheet states, hover borders. The "atmospheric thread" throughout.
+- **Tangerine** (token: `ember`) — **action only.** Reserved for primary CTAs, the logo accent bar under the wordmark, and alert/cancelled states. Don't sprinkle it elsewhere.
+- **Evergreen** (token: `fairway`) — used on light backgrounds (Forest Pale) where Fern has insufficient contrast.
+- Token names (`brass`, `ember`) are legacy from the previous cinematic-clubhouse palette; the values now point at the brand-guide Fern/Tangerine. Don't rename them — too many call sites.
+
+## Typography
+
+- **Fraunces** (`font-display`) — editorial display type for headlines, chapter numerals, italic highlights. The voice of the page.
+- **Inter** (`font-brand`) — reserved for the Teeforce wordmark lockup (`TeeforceWordmark` component) per the brand guide's "Inter for all Teeforce uses" rule. Don't use it for body copy.
+- **Instrument Sans** (`font-sans`) — body copy.
+- **JetBrains Mono** (`font-mono`) — uppercase meta labels, tee-sheet UI chrome, footer chrome.
+
+## Deployment
+
+GitHub Pages via **GitHub Actions** (`.github/workflows/deploy.yml`). On push to `main`: pnpm install → `pnpm build` → upload `dist/` → `actions/deploy-pages@v4`. Served at `teeforce.golf` via `public/CNAME`.
+
+The repo's Pages source must be set to **"GitHub Actions"** (not "Deploy from a branch") in repo Settings → Pages. If a push to `main` doesn't publish, that setting is the first thing to check.
 
 ## Current state notes
 
-- The waitlist form (`handleSubmit` in `index.html`) is a **stub**: it shows a success message and `console.log`s the email, but does not POST anywhere. Any "make the form work" task requires picking and wiring up a backend (Formspree, Netlify Forms won't work on GH Pages, a serverless endpoint, etc.) — confirm the approach with the user before implementing.
-- Page is marked "Coming Soon" — product is pre-launch, so copy should stay aspirational rather than claiming existing customers or metrics.
+- **Waitlist form is a stub.** `Waitlist` in `src/App.tsx` flips `sent` state on submit but does not POST anywhere. Making it work requires picking a backend (Formspree, a serverless endpoint, etc.) — Netlify Forms won't work on GH Pages. Confirm the approach with the user before wiring one up.
+- **Pre-launch.** Copy stays aspirational — no claims about existing customers, real metrics, or shipped features.
+- **Two-brand architecture.** Teeforce leads; "A Benjamin Golf Co. product" appears as a subtle sub-tagline in the footer. Don't mash the two brands into a single lockup.
 
 ## Workflow
 
-There are no build, lint, or test commands. To preview changes, open `index.html` directly in a browser or serve the directory with any static server (e.g. `python3 -m http.server`). Verify responsive behavior at the 768px breakpoint — the hero collapses to a single column and the mock tee sheet visual is hidden on mobile.
+- `pnpm dev` — Vite dev server (defaults to http://127.0.0.1:5173, falls through to 5174+ if taken)
+- `pnpm build` — type-check (`tsc -b`) + Vite production build into `dist/`
+- `pnpm preview` — preview built output on :4173
+
+No tests, no lint. `pnpm build` is the only correctness gate. For visual changes, run `pnpm dev` and check in a browser — verify responsive behavior at the `lg:` breakpoint (1024px), which is where the tee-sheet grid collapses. `motion` scroll animations require scrolling through the page to trigger.
