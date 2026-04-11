@@ -35,6 +35,23 @@ export function App() {
   )
 }
 
+function TeeforceWordmark({ size = 'nav' }: { size?: 'nav' | 'footer' }) {
+  const textClass = size === 'nav' ? 'text-2xl' : 'text-base'
+  const barHeight = size === 'nav' ? 'h-[2px]' : 'h-px'
+  const barOffset = size === 'nav' ? 'mt-[5px]' : 'mt-[3px]'
+  return (
+    <span className="inline-flex flex-col items-start leading-none">
+      <span
+        className={`font-brand font-extrabold lowercase tracking-[-0.04em] ${textClass}`}
+      >
+        <span className="text-bone">tee</span>
+        <span className="text-brass">force</span>
+      </span>
+      <span className={`${barOffset} ${barHeight} w-full bg-ember`} />
+    </span>
+  )
+}
+
 function Nav() {
   const [scrolled, setScrolled] = useState(false)
   useEffect(() => {
@@ -51,11 +68,8 @@ function Nav() {
       }`}
     >
       <div className="max-w-[1400px] mx-auto flex items-center justify-between px-8 h-20">
-        <a href="#" className="flex items-center gap-3">
-          <span className="w-2 h-2 rounded-full bg-brass animate-[pulse-dot_2.4s_ease-in-out_infinite]" />
-          <span className="font-display text-2xl tracking-tight">
-            tee<span className="italic text-brass">force</span>
-          </span>
+        <a href="#" className="flex items-center">
+          <TeeforceWordmark size="nav" />
         </a>
         <nav className="hidden md:flex items-center gap-10 text-[11px] uppercase tracking-[0.22em] text-bone/60">
           <a href="#auto-fill" className="hover:text-brass transition">
@@ -70,10 +84,10 @@ function Nav() {
         </nav>
         <a
           href="#waitlist"
-          className="group relative overflow-hidden border border-brass/50 px-6 py-2.5 text-[11px] uppercase tracking-[0.22em] text-brass hover:text-forest-abyss transition-colors duration-500"
+          className="group relative overflow-hidden border border-ember/60 px-6 py-2.5 text-[11px] uppercase tracking-[0.22em] text-ember hover:text-forest-abyss transition-colors duration-500"
         >
           <span className="relative z-10">Request Access</span>
-          <span className="absolute inset-0 bg-brass -translate-x-full group-hover:translate-x-0 transition-transform duration-500" />
+          <span className="absolute inset-0 bg-ember -translate-x-full group-hover:translate-x-0 transition-transform duration-500" />
         </a>
       </div>
     </header>
@@ -136,7 +150,7 @@ function Hero() {
           >
             <a
               href="#waitlist"
-              className="group inline-flex items-center gap-3 bg-brass text-forest-abyss px-8 py-4 text-xs uppercase tracking-[0.18em] font-medium hover:bg-brass-bright transition-colors"
+              className="group inline-flex items-center gap-3 bg-ember text-forest-abyss px-8 py-4 text-xs uppercase tracking-[0.18em] font-medium hover:bg-ember-bright transition-colors"
             >
               Request early access
               <span className="transition-transform group-hover:translate-x-1">→</span>
@@ -303,7 +317,7 @@ function TeeSheet() {
       <div className="relative bg-gradient-to-br from-forest-mid to-forest rounded-sm border border-bone/10 shadow-[0_40px_80px_-20px_rgba(0,0,0,0.6)] overflow-hidden">
         <div className="flex items-center justify-between px-6 py-4 border-b border-bone/10 bg-black/20">
           <div className="flex items-center gap-3">
-            <div className="w-2 h-2 rounded-full bg-ember animate-[pulse-dot_2s_ease-in-out_infinite]" />
+            <div className="w-2 h-2 rounded-full bg-brass animate-[pulse-dot_2s_ease-in-out_infinite]" />
             <div className="font-mono text-[10px] uppercase tracking-[0.22em] text-bone/60">
               Tee sheet · Live · Thu · 07 May
             </div>
@@ -429,7 +443,7 @@ function Problem() {
     },
   ]
   return (
-    <section className="bg-bone text-ink py-32 px-8 relative grain">
+    <section className="bg-forest-pale text-ink py-32 px-8 relative grain">
       <div className="max-w-[1400px] mx-auto">
         <div className="flex items-center gap-4 mb-16">
           <div className="h-px w-12 bg-ink/40" />
@@ -617,7 +631,7 @@ function HowItWorks() {
     },
   ]
   return (
-    <section id="how" className="bg-bone text-ink py-32 px-8 grain relative">
+    <section id="how" className="bg-forest-pale text-ink py-32 px-8 grain relative">
       <div className="max-w-[1400px] mx-auto">
         <div className="flex items-center gap-4 mb-16">
           <div className="h-px w-12 bg-ink/40" />
@@ -643,7 +657,7 @@ function HowItWorks() {
             >
               <div className="absolute top-0 left-0 right-0 flex items-center gap-3">
                 <div
-                  className="font-display text-brass text-2xl"
+                  className="font-display text-fairway text-2xl"
                   style={{ fontVariationSettings: '"opsz" 32, "wght" 420' }}
                 >
                   {step.n}
@@ -711,7 +725,7 @@ function Waitlist() {
           <button
             type="submit"
             disabled={sent}
-            className="bg-brass text-forest-abyss px-8 py-4 text-xs uppercase tracking-[0.18em] hover:bg-brass-bright transition-colors disabled:opacity-70"
+            className="bg-ember text-forest-abyss px-8 py-4 text-xs uppercase tracking-[0.18em] hover:bg-ember-bright transition-colors disabled:opacity-70"
           >
             {sent ? "You're on the list" : 'Request access'}
           </button>
@@ -727,14 +741,16 @@ function Waitlist() {
 function Footer() {
   return (
     <footer className="border-t border-bone/10 py-12 px-8 bg-forest-abyss">
-      <div className="max-w-[1400px] mx-auto flex flex-col md:flex-row items-center justify-between gap-6 text-[10px] text-bone/40 font-mono uppercase tracking-[0.25em]">
-        <div className="flex items-center gap-3">
-          <div className="w-1.5 h-1.5 rounded-full bg-brass" />
-          <span>teeforce · vol. i · 2026</span>
-        </div>
-        <div className="flex items-center gap-8">
-          <a href="https://benjamingolfco.com" className="hover:text-brass transition-colors">
+      <div className="max-w-[1400px] mx-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
+        <div className="flex flex-col gap-2">
+          <TeeforceWordmark size="footer" />
+          <span className="text-[10px] text-bone/40 font-mono uppercase tracking-[0.22em]">
             A Benjamin Golf Co. product
+          </span>
+        </div>
+        <div className="flex items-center gap-8 text-[10px] text-bone/40 font-mono uppercase tracking-[0.25em]">
+          <a href="https://benjamingolfco.com" className="hover:text-brass transition-colors">
+            benjamingolfco.com
           </a>
           <a
             href="mailto:aarongbenjamin@gmail.com"
