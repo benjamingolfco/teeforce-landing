@@ -682,6 +682,46 @@ function HowItWorks() {
 function Waitlist() {
   const [email, setEmail] = useState('')
   const [sent, setSent] = useState(false)
+  const [submitting, setSubmitting] = useState(false)
+  const [error, setError] = useState<string | null>(null)
+
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    if (submitting || sent) return
+    setSubmitting(true)
+    setError(null)
+    const form = e.currentTarget
+    const botcheck = (form.elements.namedItem('botcheck') as HTMLInputElement)?.value
+    if (botcheck) {
+      setSent(true)
+      setSubmitting(false)
+      return
+    }
+    try {
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({
+          access_key: 'e2d2ba36-289c-4621-b0fa-fce83ad38239',
+          subject: 'New Teeforce waitlist signup',
+          from_name: 'Teeforce Waitlist',
+          email,
+          replyto: email,
+        }),
+      })
+      const data = await res.json()
+      if (data.success) {
+        setSent(true)
+      } else {
+        setError(data.message || 'Something went wrong. Please try again.')
+      }
+    } catch {
+      setError('Network error. Please try again.')
+    } finally {
+      setSubmitting(false)
+    }
+  }
+
   return (
     <section
       id="waitlist"
@@ -707,10 +747,7 @@ function Waitlist() {
           We're building Teeforce alongside real course operators. Get early access when it launches and help shape the product.
         </p>
         <form
-          onSubmit={(e) => {
-            e.preventDefault()
-            setSent(true)
-          }}
+          onSubmit={onSubmit}
           className="flex flex-col sm:flex-row gap-2 max-w-lg mx-auto"
         >
           <input
@@ -719,17 +756,30 @@ function Waitlist() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="your@course.com"
-            disabled={sent}
+            disabled={sent || submitting}
             className="flex-1 bg-bone/5 border border-bone/20 px-5 py-4 text-bone placeholder:text-bone/30 focus:outline-none focus:border-brass focus:bg-bone/10 font-mono text-sm transition-colors"
+          />
+          <input
+            type="text"
+            name="botcheck"
+            tabIndex={-1}
+            autoComplete="off"
+            className="hidden"
+            aria-hidden="true"
           />
           <button
             type="submit"
-            disabled={sent}
+            disabled={sent || submitting}
             className="bg-ember text-forest-abyss px-8 py-4 text-xs uppercase tracking-[0.18em] hover:bg-ember-bright transition-colors disabled:opacity-70"
           >
-            {sent ? "You're on the list" : 'Request access'}
+            {sent ? "You're on the list" : submitting ? 'Sending…' : 'Request access'}
           </button>
         </form>
+        {error && (
+          <p className="mt-4 text-[11px] uppercase tracking-[0.2em] text-ember font-mono">
+            {error}
+          </p>
+        )}
         <p className="mt-6 text-[10px] uppercase tracking-[0.25em] text-bone/40 font-mono">
           No spam · Cancel anytime · Launching 2026
         </p>
