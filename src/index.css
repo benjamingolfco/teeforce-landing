@@ -1,0 +1,81 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bone: #f2ede0;
+  --color-bone-dim: #e6dfce;
+  --color-parchment: #faf6ec;
+  --color-ink: #0a1614;
+  --color-forest-abyss: #050f0c;
+  --color-forest: #0a1f17;
+  --color-forest-mid: #0f3324;
+  --color-fairway: #1f5a3f;
+  --color-moss: #587a63;
+  --color-brass: #b8935a;
+  --color-brass-bright: #d4ad6c;
+  --color-ember: #c84b16;
+  --color-ember-bright: #e85c20;
+
+  --font-display: "Fraunces", ui-serif, Georgia, serif;
+  --font-sans: "Instrument Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+}
+
+@layer base {
+  html {
+    font-family: var(--font-sans);
+    background: var(--color-forest-abyss);
+    color: var(--color-bone);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    margin: 0;
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background: var(--color-brass);
+    color: var(--color-forest-abyss);
+  }
+
+  .font-display {
+    font-family: var(--font-display);
+    font-optical-sizing: auto;
+    font-variation-settings: "SOFT" 50, "WONK" 1;
+  }
+}
+
+@layer utilities {
+  .grain::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.08;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  }
+
+  .hairline {
+    border-color: color-mix(in srgb, var(--color-bone) 18%, transparent);
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .text-pretty {
+    text-wrap: pretty;
+  }
+}
+
+@keyframes ticker {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; box-shadow: 0 0 0 0 color-mix(in srgb, var(--color-ember) 60%, transparent); }
+  50% { opacity: 0.6; box-shadow: 0 0 0 8px transparent; }
+}
