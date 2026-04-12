@@ -644,11 +644,18 @@ function HowItWorks() {
                 A QR code at the pro shop or clubhouse. Golfers scan it with their phone, enter name, party size, and number. Done — they're on the list.
               </p>
             </div>
-            <div className="flex justify-center md:justify-end">
-              <div className="max-w-xs border border-bone/15 rounded-sm shadow-[0_20px_60px_-15px_rgba(0,0,0,0.5)] overflow-hidden">
+            <div className="flex justify-center md:justify-end gap-6">
+              <div className="max-w-[200px] border border-bone/15 rounded-sm shadow-[0_20px_60px_-15px_rgba(0,0,0,0.5)] overflow-hidden">
                 <img
                   src="/screenshots/qr-sign.jpeg"
-                  alt="QR code sign for walkup waitlist"
+                  alt="QR code sign — scan to join"
+                  className="w-full h-auto"
+                />
+              </div>
+              <div className="max-w-[160px] border border-bone/15 rounded-sm shadow-[0_20px_60px_-15px_rgba(0,0,0,0.5)] overflow-hidden">
+                <img
+                  src="/screenshots/join-form.jpeg"
+                  alt="Golfer filling out the waitlist form on their phone"
                   className="w-full h-auto"
                 />
               </div>
@@ -694,43 +701,32 @@ function HowItWorks() {
             </div>
           </motion.div>
 
-          {/* Step 3 — with join form screenshot */}
+          {/* Step 3 — text only */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.3 }}
-            className="grid md:grid-cols-2 gap-12 items-center"
+            className="max-w-xl relative pt-12"
           >
-            <div className="relative pt-12">
-              <div className="absolute top-0 left-0 right-0 flex items-center gap-3">
-                <div
-                  className="font-display text-brass text-2xl"
-                  style={{ fontVariationSettings: '"opsz" 32, "wght" 420' }}
-                >
-                  III
-                </div>
-                <div className="flex-1 h-px bg-bone/15" />
-              </div>
-              <h3
-                className="font-display text-3xl mb-4 mt-6 text-bone"
-                style={{ fontVariationSettings: '"opsz" 48, "wght" 450, "SOFT" 60, "WONK" 1' }}
+            <div className="absolute top-0 left-0 right-0 flex items-center gap-3">
+              <div
+                className="font-display text-brass text-2xl"
+                style={{ fontVariationSettings: '"opsz" 32, "wght" 420' }}
               >
-                Next golfer gets a text
-              </h3>
-              <p className="text-bone/55 leading-relaxed">
-                The next person on the waitlist gets an automatic text. They tap to claim the slot. If they don't respond, it rolls to the next person.
-              </p>
-            </div>
-            <div className="flex justify-center md:justify-end">
-              <div className="max-w-[220px] border border-bone/15 rounded-sm shadow-[0_20px_60px_-15px_rgba(0,0,0,0.5)] overflow-hidden">
-                <img
-                  src="/screenshots/join-form.jpeg"
-                  alt="Golfer joining the waitlist on their phone"
-                  className="w-full h-auto"
-                />
+                III
               </div>
+              <div className="flex-1 h-px bg-bone/15" />
             </div>
+            <h3
+              className="font-display text-3xl mb-4 mt-6 text-bone"
+              style={{ fontVariationSettings: '"opsz" 48, "wght" 450, "SOFT" 60, "WONK" 1' }}
+            >
+              Next golfer gets a text
+            </h3>
+            <p className="text-bone/55 leading-relaxed">
+              The next person on the waitlist gets an automatic text. They tap to claim the slot. If they don't respond, it rolls to the next person.
+            </p>
           </motion.div>
         </div>
       </div>
