@@ -701,36 +701,68 @@ function HowItWorks() {
             </div>
           </motion.div>
 
-          {/* Step 3 — text only */}
+          {/* Step 3 — with SMS mock */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.3 }}
-            className="max-w-xl relative pt-12"
+            className="grid md:grid-cols-2 gap-12 items-center"
           >
-            <div className="absolute top-0 left-0 right-0 flex items-center gap-3">
-              <div
-                className="font-display text-brass text-2xl"
-                style={{ fontVariationSettings: '"opsz" 32, "wght" 420' }}
-              >
-                III
+            <div className="relative pt-12">
+              <div className="absolute top-0 left-0 right-0 flex items-center gap-3">
+                <div
+                  className="font-display text-brass text-2xl"
+                  style={{ fontVariationSettings: '"opsz" 32, "wght" 420' }}
+                >
+                  III
+                </div>
+                <div className="flex-1 h-px bg-bone/15" />
               </div>
-              <div className="flex-1 h-px bg-bone/15" />
+              <h3
+                className="font-display text-3xl mb-4 mt-6 text-bone"
+                style={{ fontVariationSettings: '"opsz" 48, "wght" 450, "SOFT" 60, "WONK" 1' }}
+              >
+                Next golfer gets a text
+              </h3>
+              <p className="text-bone/55 leading-relaxed">
+                The next person on the waitlist gets an automatic text. They tap to claim the slot. If they don't respond, it rolls to the next person.
+              </p>
             </div>
-            <h3
-              className="font-display text-3xl mb-4 mt-6 text-bone"
-              style={{ fontVariationSettings: '"opsz" 48, "wght" 450, "SOFT" 60, "WONK" 1' }}
-            >
-              Next golfer gets a text
-            </h3>
-            <p className="text-bone/55 leading-relaxed">
-              The next person on the waitlist gets an automatic text. They tap to claim the slot. If they don't respond, it rolls to the next person.
-            </p>
+            <div className="flex justify-center md:justify-end">
+              <SmsBubble />
+            </div>
           </motion.div>
         </div>
       </div>
     </section>
+  )
+}
+
+function SmsBubble() {
+  return (
+    <div className="max-w-[280px]">
+      <div className="bg-[#1a1a2e] rounded-[20px] p-5 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.5)] border border-bone/10">
+        <div className="flex items-center gap-2 mb-4 pb-3 border-b border-bone/10">
+          <div className="w-8 h-8 rounded-full bg-bone/15 flex items-center justify-center text-[10px] text-bone/60 font-mono">
+            TF
+          </div>
+          <div>
+            <div className="text-[11px] text-bone/80 font-medium">Teeforce</div>
+            <div className="text-[9px] text-bone/40">Text Message</div>
+          </div>
+        </div>
+        <div className="bg-[#2a2a3e] rounded-2xl rounded-tl-sm px-4 py-3">
+          <p className="text-[13px] text-bone/90 leading-relaxed">
+            Pine Valley: 10:30 AM tee time available! Claim your spot:{' '}
+            <span className="text-brass underline">tfrce.golf/c/a3x</span>
+          </p>
+        </div>
+        <div className="text-[9px] text-bone/30 mt-2 text-right font-mono">
+          now
+        </div>
+      </div>
+    </div>
   )
 }
 
