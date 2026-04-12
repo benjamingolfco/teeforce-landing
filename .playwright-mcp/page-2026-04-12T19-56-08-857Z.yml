@@ -1,0 +1,63 @@
+- main [ref=e3]:
+  - generic [ref=e5]:
+    - link "teeforce" [ref=e6] [cursor=pointer]:
+      - /url: "#"
+      - generic [ref=e8]: teeforce
+    - link "Get Early Access" [ref=e10] [cursor=pointer]:
+      - /url: "#early-access"
+      - text: Get Early Access
+  - generic [ref=e16]:
+    - generic [ref=e19]: Now in Early Access
+    - heading "The course management platform you've been waiting for." [level=1] [ref=e20]
+    - paragraph [ref=e21]: A modern tee sheet, Square-integrated POS, and smart course operations — built for the way you actually run your course.
+    - generic [ref=e22]:
+      - textbox "your@course.com" [ref=e23]
+      - button "Get Early Access" [ref=e24]
+    - paragraph [ref=e25]: No spam, no commitment. We'll get you set up and keep you in the loop as we build.
+    - link "See what we're building ↓" [ref=e27] [cursor=pointer]:
+      - /url: "#pitch"
+  - generic [ref=e29]:
+    - generic [ref=e32]: The Problem
+    - heading "Running a course shouldn't mean running five systems." [level=2] [ref=e33]
+    - paragraph [ref=e34]: Most course software was built a decade ago and it shows. You deserve better.
+    - generic [ref=e35]:
+      - generic [ref=e36]:
+        - generic [ref=e37]: "01"
+        - generic [ref=e38]:
+          - heading "Five disconnected tools" [level=3] [ref=e39]
+          - paragraph [ref=e40]: Tee sheet here, POS there, inventory somewhere else. You toggle between platforms instead of running a course.
+      - generic [ref=e41]:
+        - generic [ref=e42]: "02"
+        - generic [ref=e43]:
+          - heading "Revenue lost to no-shows" [level=3] [ref=e44]
+          - paragraph [ref=e45]: Cancellations and no-shows leave holes in your schedule. By the time staff notices, it's too late to fill them.
+      - generic [ref=e46]:
+        - generic [ref=e47]: "03"
+        - generic [ref=e48]:
+          - heading "Software from 2009" [level=3] [ref=e49]
+          - paragraph [ref=e50]: Clunky interfaces, slow performance, days of staff training. Your software should work for you — not the other way around.
+  - generic [ref=e52]:
+    - generic [ref=e55]: The Platform
+    - heading "One platform. Everything you need." [level=2] [ref=e56]
+    - generic [ref=e57]:
+      - generic [ref=e58]:
+        - heading "Modern tee sheet" [level=3] [ref=e59]
+        - paragraph [ref=e60]: A clean, fast tee sheet built for how courses actually operate. Drag, drop, done.
+      - generic [ref=e61]:
+        - heading "Square integration" [level=3] [ref=e62]
+        - paragraph [ref=e63]: POS, payments, and inventory connected to your tee sheet. One system, no double-entry.
+      - generic [ref=e64]:
+        - heading "Cancellation filling" [level=3] [ref=e65]
+        - paragraph [ref=e66]: When a slot opens up, the next person on the waitlist gets a text automatically. No-shows become revenue.
+      - generic [ref=e67]:
+        - heading "Course analytics" [level=3] [ref=e68]
+        - paragraph [ref=e69]: Utilization, revenue, no-show rates — the numbers you need to run a tighter operation.
+  - generic [ref=e71]:
+    - generic [ref=e72]:
+      - generic [ref=e74]: teeforce
+      - generic [ref=e76]: © 2026 · A Benjamin Golf Co. product
+    - generic [ref=e77]:
+      - link "benjamingolfco.com" [ref=e78] [cursor=pointer]:
+        - /url: https://benjamingolfco.com
+      - link "info@teeforce.golf" [ref=e79] [cursor=pointer]:
+        - /url: mailto:info@teeforce.golf

@@ -1,0 +1,67 @@
+- main [ref=e3]:
+  - generic [ref=e5]:
+    - link "teeforce" [ref=e6] [cursor=pointer]:
+      - /url: "#"
+      - generic [ref=e8]: teeforce
+    - link "Get Early Access" [ref=e10] [cursor=pointer]:
+      - /url: "#early-access"
+      - text: Get Early Access
+  - generic [ref=e16]:
+    - generic [ref=e19]: Now in Early Access
+    - heading "The course management platform you've been waiting for." [level=1] [ref=e20]
+    - paragraph [ref=e21]: Teeforce is the modern course management platform with automatic waitlist filling, Square integration, and everything you need to run your course. The walkup waitlist is live now — try it today.
+    - generic [ref=e22]:
+      - textbox "your@course.com" [ref=e23]
+      - button "Get Early Access" [ref=e24]
+    - paragraph [ref=e25]: No spam, no commitment. We'll get you set up and keep you in the loop as we build.
+    - link "See what we're building ↓" [ref=e27] [cursor=pointer]:
+      - /url: "#pitch"
+  - generic [ref=e29]:
+    - generic [ref=e32]: The Problem
+    - heading "Full course, walkup golfers, no good options." [level=2] [ref=e33]
+    - paragraph [ref=e34]: Every course deals with this. Most handle it with a clipboard or a "come back later."
+    - generic [ref=e35]:
+      - generic [ref=e36]:
+        - generic [ref=e37]: "01"
+        - generic [ref=e38]:
+          - heading "Walkups get turned away" [level=3] [ref=e39]
+          - paragraph [ref=e40]: A group shows up ready to play but the sheet looks full. Without a waitlist, they leave — and that's revenue walking out the door.
+      - generic [ref=e41]:
+        - generic [ref=e42]: "02"
+        - generic [ref=e43]:
+          - heading "No-shows leave empty slots" [level=3] [ref=e44]
+          - paragraph [ref=e45]: Industry data shows 9–18% of tee times go unfilled from no-shows and cancellations. Those slots could go to the walkup golfers you just sent home.
+      - generic [ref=e46]:
+        - generic [ref=e47]: "03"
+        - generic [ref=e48]:
+          - heading "Staff are playing waitlist coordinator" [level=3] [ref=e49]
+          - paragraph [ref=e50]: Taking names, checking the sheet, calling people back — your pro shop staff has better things to do than manage a clipboard.
+  - generic [ref=e52]:
+    - generic [ref=e55]: The Platform
+    - heading "One platform. Everything you need." [level=2] [ref=e56]
+    - generic [ref=e57]:
+      - generic [ref=e58]:
+        - generic [ref=e59]: Available now
+        - heading "Walkup waitlist & auto-notify" [level=3] [ref=e60]
+        - paragraph [ref=e61]: Golfers join via QR code, get texted automatically when a slot opens. No clipboard, no callbacks.
+      - generic [ref=e62]:
+        - generic [ref=e63]: Coming soon
+        - heading "Modern tee sheet" [level=3] [ref=e64]
+        - paragraph [ref=e65]: A clean, fast tee sheet built for how courses actually operate. Drag, drop, done.
+      - generic [ref=e66]:
+        - generic [ref=e67]: Coming soon
+        - heading "Square integration" [level=3] [ref=e68]
+        - paragraph [ref=e69]: POS, payments, and inventory connected to your tee sheet. One system, no double-entry.
+      - generic [ref=e70]:
+        - generic [ref=e71]: Coming soon
+        - heading "Course analytics" [level=3] [ref=e72]
+        - paragraph [ref=e73]: Utilization, revenue, no-show rates — the numbers you need to run a tighter operation.
+  - generic [ref=e75]:
+    - generic [ref=e76]:
+      - generic [ref=e78]: teeforce
+      - generic [ref=e80]: © 2026 · A Benjamin Golf Co. product
+    - generic [ref=e81]:
+      - link "benjamingolfco.com" [ref=e82] [cursor=pointer]:
+        - /url: https://benjamingolfco.com
+      - link "info@teeforce.golf" [ref=e83] [cursor=pointer]:
+        - /url: mailto:info@teeforce.golf

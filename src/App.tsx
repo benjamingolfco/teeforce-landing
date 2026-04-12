@@ -531,18 +531,18 @@ function Problem() {
   const items = [
     {
       n: '01',
-      title: 'Walkups get turned away',
-      body: "A group shows up ready to play but the sheet looks full. Without a waitlist, they leave — and that's revenue walking out the door.",
+      title: 'No-shows happen',
+      body: "9–18% of tee times go unfilled from cancellations and no-shows. That's revenue disappearing from your sheet every single day.",
     },
     {
       n: '02',
-      title: 'No-shows leave empty slots',
-      body: 'Industry data shows 9–18% of tee times go unfilled from no-shows and cancellations. Those slots could go to the walkup golfers you just sent home.',
+      title: 'Golfers are right there',
+      body: "There are people on the range, on the putting green, in the clubhouse — they'd play if they knew a slot just opened. But they don't.",
     },
     {
       n: '03',
-      title: 'Staff are playing waitlist coordinator',
-      body: "Taking names, checking the sheet, calling people back — your pro shop staff has better things to do than manage a clipboard.",
+      title: 'Nobody connects them',
+      body: "The open slot and the available golfer are 50 yards apart, but there's no system to bridge the gap. Staff can't track it. Golfers can't see it.",
     },
   ]
   return (
@@ -558,11 +558,11 @@ function Problem() {
           className="font-display text-5xl md:text-7xl lg:text-[7rem] leading-[0.9] max-w-5xl mb-8 text-balance"
           style={{ fontVariationSettings: '"opsz" 144, "wght" 350, "SOFT" 80, "WONK" 1' }}
         >
-          Full course, walkup golfers,{' '}
-          <span className="italic">no good options.</span>
+          Empty slots. Available golfers.{' '}
+          <span className="italic">No connection.</span>
         </h2>
         <p className="max-w-2xl text-lg text-ink/60 leading-relaxed mb-24 text-pretty">
-          Every course deals with this. Most handle it with a clipboard or a "come back later."
+          Every course loses revenue to no-shows while golfers who'd happily play have no idea a slot just opened.
         </p>
         <div className="grid md:grid-cols-3 gap-16">
           {items.map((item, i) => (
@@ -655,32 +655,43 @@ function HowItWorks() {
             </div>
           </motion.div>
 
-          {/* Step 2 — text only */}
+          {/* Step 2 — with post-opening screenshot */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.15 }}
-            className="max-w-xl relative pt-12"
+            className="grid md:grid-cols-2 gap-12 items-center"
           >
-            <div className="absolute top-0 left-0 right-0 flex items-center gap-3">
-              <div
-                className="font-display text-brass text-2xl"
-                style={{ fontVariationSettings: '"opsz" 32, "wght" 420' }}
-              >
-                II
+            <div className="relative pt-12">
+              <div className="absolute top-0 left-0 right-0 flex items-center gap-3">
+                <div
+                  className="font-display text-brass text-2xl"
+                  style={{ fontVariationSettings: '"opsz" 32, "wght" 420' }}
+                >
+                  II
+                </div>
+                <div className="flex-1 h-px bg-bone/15" />
               </div>
-              <div className="flex-1 h-px bg-bone/15" />
+              <h3
+                className="font-display text-3xl mb-4 mt-6 text-bone"
+                style={{ fontVariationSettings: '"opsz" 48, "wght" 450, "SOFT" 60, "WONK" 1' }}
+              >
+                Operator posts an opening
+              </h3>
+              <p className="text-bone/55 leading-relaxed">
+                When a tee time opens up — cancellation, no-show, or a gap in the sheet — the operator posts it in Teeforce. One tap.
+              </p>
             </div>
-            <h3
-              className="font-display text-3xl mb-4 mt-6 text-bone"
-              style={{ fontVariationSettings: '"opsz" 48, "wght" 450, "SOFT" 60, "WONK" 1' }}
-            >
-              Operator posts an opening
-            </h3>
-            <p className="text-bone/55 leading-relaxed">
-              When a tee time opens up — cancellation, no-show, or a gap in the sheet — the operator posts it in Teeforce. One tap.
-            </p>
+            <div className="flex justify-center md:justify-end">
+              <div className="border border-bone/15 rounded-sm shadow-[0_20px_60px_-15px_rgba(0,0,0,0.5)] overflow-hidden">
+                <img
+                  src="/screenshots/post-opening.jpeg"
+                  alt="Operator posting a tee time opening in Teeforce"
+                  className="w-full h-auto"
+                />
+              </div>
+            </div>
           </motion.div>
 
           {/* Step 3 — with join form screenshot */}
