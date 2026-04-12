@@ -471,11 +471,8 @@ function Hero() {
               className="mt-10 font-display text-[clamp(2.75rem,7vw,6.5rem)] leading-[0.92] tracking-tight text-balance"
               style={{ fontVariationSettings: '"opsz" 144, "wght" 400, "SOFT" 100, "WONK" 1' }}
             >
-              Never lose a tee time
-              <br />
-              to a{' '}
-              <span className="italic font-light text-brass-bright">no-show</span>{' '}
-              again.
+              No-shows don't have to mean{' '}
+              <span className="italic font-light text-brass-bright">lost revenue.</span>
             </motion.h1>
 
             <motion.p
