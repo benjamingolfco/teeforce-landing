@@ -58,12 +58,279 @@ function FullLandingPage() {
 function ComingSoonPage() {
   return (
     <>
-      <Nav />
-      <div className="min-h-screen flex items-center justify-center">
-        <p className="text-bone/50">Coming soon page — under construction</p>
-      </div>
+      <ComingSoonNav />
+      <ComingSoonHero />
+      <Problem />
+      <CompactFeatures />
       <Footer />
     </>
+  )
+}
+
+function ComingSoonNav() {
+  const [scrolled, setScrolled] = useState(false)
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 20)
+    window.addEventListener('scroll', onScroll)
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
+  return (
+    <header
+      className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${
+        scrolled
+          ? 'bg-forest-abyss/80 backdrop-blur-xl border-b border-bone/10'
+          : 'bg-transparent'
+      }`}
+    >
+      <div className="max-w-[1400px] mx-auto flex items-center justify-between px-8 h-20">
+        <a href="#" className="flex items-center">
+          <TeeforceWordmark size="nav" />
+        </a>
+        <a
+          href="#early-access"
+          className="group relative overflow-hidden border border-ember/60 px-6 py-2.5 text-[11px] uppercase tracking-[0.22em] text-ember hover:text-forest-abyss transition-colors duration-500"
+        >
+          <span className="relative z-10">Get Early Access</span>
+          <span className="absolute inset-0 bg-ember -translate-x-full group-hover:translate-x-0 transition-transform duration-500" />
+        </a>
+      </div>
+    </header>
+  )
+}
+
+function ComingSoonHero() {
+  const [email, setEmail] = useState('')
+  const [sent, setSent] = useState(false)
+  const [submitting, setSubmitting] = useState(false)
+  const [error, setError] = useState<string | null>(null)
+
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    if (submitting || sent) return
+    setSubmitting(true)
+    setError(null)
+    const form = e.currentTarget
+    const botcheck = (form.elements.namedItem('botcheck') as HTMLInputElement)?.value
+    if (botcheck) {
+      setSent(true)
+      setSubmitting(false)
+      return
+    }
+    try {
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({
+          access_key: 'e2d2ba36-289c-4621-b0fa-fce83ad38239',
+          subject: 'New Teeforce early access signup',
+          from_name: 'Teeforce Early Access',
+          email,
+          replyto: email,
+        }),
+      })
+      const data = await res.json()
+      if (data.success) {
+        setSent(true)
+      } else {
+        setError(data.message || 'Something went wrong. Please try again.')
+      }
+    } catch {
+      setError('Network error. Please try again.')
+    } finally {
+      setSubmitting(false)
+    }
+  }
+
+  return (
+    <section id="early-access" className="relative min-h-screen w-full overflow-hidden grain">
+      <img
+        src={HERO_IMG}
+        alt=""
+        className="absolute inset-0 w-full h-full object-cover"
+      />
+      <div className="absolute inset-0 bg-gradient-to-b from-forest-abyss/85 via-forest-abyss/35 to-forest-abyss" />
+      <div className="absolute inset-0 bg-gradient-to-r from-forest-abyss/70 via-transparent to-transparent" />
+
+      <div className="relative z-10 min-h-screen flex items-center pt-32 pb-16 px-8">
+        <div className="max-w-[1400px] mx-auto w-full max-w-3xl">
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 0.2 }}
+            className="flex items-center gap-4"
+          >
+            <div className="h-px w-16 bg-brass/60" />
+            <span className="text-[10px] uppercase tracking-[0.3em] text-brass/90 font-mono">
+              Now in Early Access
+            </span>
+          </motion.div>
+
+          <motion.h1
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1.2, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+            className="mt-10 font-display text-[clamp(2.75rem,7vw,6.5rem)] leading-[0.92] tracking-tight text-balance"
+            style={{ fontVariationSettings: '"opsz" 144, "wght" 400, "SOFT" 100, "WONK" 1' }}
+          >
+            The course management platform{' '}
+            <span className="italic font-light text-brass-bright">you've been waiting for.</span>
+          </motion.h1>
+
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 0.9 }}
+            className="mt-8 max-w-xl text-lg text-bone/70 leading-relaxed text-pretty"
+          >
+            Teeforce is the modern course management platform with automatic waitlist filling, Square integration, and everything you need to run your course.{' '}
+            <span className="text-bone">The walkup waitlist is live now — try it today.</span>
+          </motion.p>
+
+          <motion.form
+            onSubmit={onSubmit}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 1.1 }}
+            className="mt-10 flex flex-col sm:flex-row gap-2 max-w-lg"
+          >
+            <input
+              type="email"
+              required
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="your@course.com"
+              disabled={sent || submitting}
+              className="flex-1 bg-bone/5 border border-bone/20 px-5 py-4 text-bone placeholder:text-bone/30 focus:outline-none focus:border-brass focus:bg-bone/10 font-mono text-sm transition-colors"
+            />
+            <input
+              type="text"
+              name="botcheck"
+              tabIndex={-1}
+              autoComplete="off"
+              className="hidden"
+              aria-hidden="true"
+            />
+            <button
+              type="submit"
+              disabled={sent || submitting}
+              className="bg-ember text-forest-abyss px-8 py-4 text-xs uppercase tracking-[0.18em] font-medium hover:bg-ember-bright transition-colors disabled:opacity-70"
+            >
+              {sent ? "You're on the list" : submitting ? 'Sending…' : 'Get Early Access'}
+            </button>
+          </motion.form>
+          {error && (
+            <p className="mt-4 text-[11px] uppercase tracking-[0.2em] text-ember font-mono">
+              {error}
+            </p>
+          )}
+
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1, delay: 1.4 }}
+            className="mt-6 text-[11px] text-bone/45 font-mono leading-relaxed"
+          >
+            No spam, no commitment. We'll get you set up and keep you in the loop as we build.
+          </motion.p>
+
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 1.6 }}
+            className="mt-8"
+          >
+            <a
+              href="#pitch"
+              className="text-sm text-bone/60 underline underline-offset-[6px] decoration-bone/30 hover:text-bone transition"
+            >
+              See what we're building ↓
+            </a>
+          </motion.div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+function CompactFeatures() {
+  const features = [
+    {
+      title: 'Walkup waitlist & auto-notify',
+      body: 'Golfers join via QR code, get texted automatically when a slot opens. No clipboard, no callbacks.',
+      badge: 'Available now',
+      available: true,
+    },
+    {
+      title: 'Modern tee sheet',
+      body: 'A clean, fast tee sheet built for how courses actually operate. Drag, drop, done.',
+      badge: 'Coming soon',
+      available: false,
+    },
+    {
+      title: 'Square integration',
+      body: 'POS, payments, and inventory connected to your tee sheet. One system, no double-entry.',
+      badge: 'Coming soon',
+      available: false,
+    },
+    {
+      title: 'Course analytics',
+      body: 'Utilization, revenue, no-show rates — the numbers you need to run a tighter operation.',
+      badge: 'Coming soon',
+      available: false,
+    },
+  ]
+
+  return (
+    <section id="pitch" className="bg-forest-abyss py-32 px-8 relative">
+      <div className="max-w-[1400px] mx-auto">
+        <div className="flex items-center gap-4 mb-12">
+          <div className="h-px w-12 bg-brass" />
+          <span className="text-[10px] uppercase tracking-[0.3em] text-brass/80 font-mono">
+            The Platform
+          </span>
+        </div>
+        <h2
+          className="font-display text-5xl md:text-7xl lg:text-[7rem] leading-[0.9] max-w-5xl mb-24 text-balance"
+          style={{ fontVariationSettings: '"opsz" 144, "wght" 350, "SOFT" 80, "WONK" 1' }}
+        >
+          One platform.{' '}
+          <span className="italic text-brass-bright">Everything you need.</span>
+        </h2>
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {features.map((feat, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.7, delay: i * 0.1 }}
+              className={`border p-6 ${
+                feat.available
+                  ? 'border-brass/40 bg-brass/[0.04]'
+                  : 'border-bone/10 opacity-70'
+              }`}
+            >
+              <span
+                className={`inline-block text-[10px] uppercase tracking-[0.2em] font-mono px-3 py-1 mb-5 ${
+                  feat.available
+                    ? 'bg-ember text-forest-abyss'
+                    : 'text-bone/50 border border-bone/20'
+                }`}
+              >
+                {feat.badge}
+              </span>
+              <h3
+                className="font-display text-xl mb-3 text-bone"
+                style={{ fontVariationSettings: '"opsz" 32, "wght" 480' }}
+              >
+                {feat.title}
+              </h3>
+              <p className="text-bone/55 text-sm leading-relaxed">{feat.body}</p>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
   )
 }
 
