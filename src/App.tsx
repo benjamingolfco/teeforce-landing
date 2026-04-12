@@ -742,23 +742,23 @@ function HowItWorks() {
 function SmsBubble() {
   return (
     <div className="max-w-[280px]">
-      <div className="bg-[#1a1a2e] rounded-[20px] p-5 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.5)] border border-bone/10">
-        <div className="flex items-center gap-2 mb-4 pb-3 border-b border-bone/10">
-          <div className="w-8 h-8 rounded-full bg-bone/15 flex items-center justify-center text-[10px] text-bone/60 font-mono">
+      <div className="bg-bone/95 rounded-[20px] p-5 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.5)]">
+        <div className="flex items-center gap-2 mb-4 pb-3 border-b border-ink/10">
+          <div className="w-8 h-8 rounded-full bg-fairway flex items-center justify-center text-[10px] text-bone font-mono font-medium">
             TF
           </div>
           <div>
-            <div className="text-[11px] text-bone/80 font-medium">Teeforce</div>
-            <div className="text-[9px] text-bone/40">Text Message</div>
+            <div className="text-[11px] text-ink font-medium">Teeforce</div>
+            <div className="text-[9px] text-ink/50">Text Message</div>
           </div>
         </div>
-        <div className="bg-[#2a2a3e] rounded-2xl rounded-tl-sm px-4 py-3">
-          <p className="text-[13px] text-bone/90 leading-relaxed">
+        <div className="bg-[#34C759] rounded-2xl rounded-tr-sm px-4 py-3">
+          <p className="text-[13px] text-white leading-relaxed">
             Pine Valley: 10:30 AM tee time available! Claim your spot:{' '}
-            <span className="text-brass underline">tfrce.golf/c/a3x</span>
+            <span className="underline">tfrce.golf/c/a3x</span>
           </p>
         </div>
-        <div className="text-[9px] text-bone/30 mt-2 text-right font-mono">
+        <div className="text-[9px] text-ink/40 mt-2 text-right font-mono">
           now
         </div>
       </div>
