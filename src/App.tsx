@@ -2,6 +2,19 @@ import { useEffect, useRef, useState } from 'react'
 import { motion, useInView, AnimatePresence } from 'motion/react'
 import Lenis from 'lenis'
 
+const HERO_IMG =
+  'https://images.unsplash.com/photo-1592919505780-303950717480?auto=format&fit=crop&w=2400&q=85'
+
+function useHash() {
+  const [hash, setHash] = useState(window.location.hash)
+  useEffect(() => {
+    const onHashChange = () => setHash(window.location.hash)
+    window.addEventListener('hashchange', onHashChange)
+    return () => window.removeEventListener('hashchange', onHashChange)
+  }, [])
+  return hash
+}
+
 export function App() {
   useEffect(() => {
     const lenis = new Lenis({ lerp: 0.09, smoothWheel: true })
@@ -17,8 +30,19 @@ export function App() {
     }
   }, [])
 
+  const hash = useHash()
+  const isPreview = hash === '#/preview'
+
   return (
     <main className="min-h-screen bg-forest-abyss text-bone font-sans antialiased">
+      {isPreview ? <FullLandingPage /> : <ComingSoonPage />}
+    </main>
+  )
+}
+
+function FullLandingPage() {
+  return (
+    <>
       <Nav />
       <Hero />
       <Problem />
@@ -27,7 +51,19 @@ export function App() {
       <Features />
       <Waitlist />
       <Footer />
-    </main>
+    </>
+  )
+}
+
+function ComingSoonPage() {
+  return (
+    <>
+      <Nav />
+      <div className="min-h-screen flex items-center justify-center">
+        <p className="text-bone/50">Coming soon page — under construction</p>
+      </div>
+      <Footer />
+    </>
   )
 }
 
@@ -90,8 +126,13 @@ function Nav() {
 function Hero() {
   return (
     <section className="relative min-h-screen w-full overflow-hidden grain">
-      <div className="absolute inset-0 bg-gradient-to-b from-forest via-forest-abyss to-forest-abyss" />
-      <div className="absolute inset-0 bg-gradient-to-br from-brass/10 via-transparent to-transparent" />
+      <img
+        src={HERO_IMG}
+        alt=""
+        className="absolute inset-0 w-full h-full object-cover"
+      />
+      <div className="absolute inset-0 bg-gradient-to-b from-forest-abyss/85 via-forest-abyss/35 to-forest-abyss" />
+      <div className="absolute inset-0 bg-gradient-to-r from-forest-abyss/70 via-transparent to-transparent" />
 
       <div className="relative z-10 min-h-screen flex items-center pt-32 pb-16 px-8">
         <div className="max-w-[1400px] mx-auto w-full grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
@@ -160,108 +201,17 @@ function Hero() {
             transition={{ duration: 1.2, delay: 0.7, ease: [0.16, 1, 0.3, 1] }}
             className="lg:col-span-6"
           >
-            <HeroDashboardPlaceholder />
+            <div className="relative border border-bone/15 rounded-sm shadow-[0_40px_80px_-20px_rgba(0,0,0,0.6)] overflow-hidden">
+              <img
+                src="/screenshots/dashboard.jpeg"
+                alt="Teeforce walkup waitlist dashboard"
+                className="w-full h-auto"
+              />
+            </div>
           </motion.div>
         </div>
       </div>
     </section>
-  )
-}
-
-// TODO: Replace HeroDashboardPlaceholder with a real screenshot of the operator dashboard.
-// Capture URL: https://purple-field-0a3932a0f.4.azurestaticapps.net/course/019d608a-2356-765e-8420-f570c659f62b/pos/waitlist
-// Expected content: waitlist open with 2-3 openings posted and 3 golfers in the queue.
-function HeroDashboardPlaceholder() {
-  const openings = [
-    { time: '2:30 PM', party: 2 },
-    { time: '3:00 PM', party: 4 },
-  ]
-  const queue = [
-    { name: 'Mike Thompson', party: 2 },
-    { name: 'Sarah Kim', party: 4 },
-    { name: 'Dan Reeves', party: 3 },
-  ]
-  return (
-    <div className="relative">
-      <div className="relative bg-gradient-to-br from-forest-mid to-forest rounded-sm border border-bone/10 shadow-[0_40px_80px_-20px_rgba(0,0,0,0.6)] overflow-hidden">
-        <div className="flex items-center gap-3 px-4 py-3 border-b border-bone/10 bg-black/30">
-          <div className="flex gap-1.5">
-            <div className="w-2.5 h-2.5 rounded-full bg-bone/25" />
-            <div className="w-2.5 h-2.5 rounded-full bg-bone/15" />
-            <div className="w-2.5 h-2.5 rounded-full bg-bone/15" />
-          </div>
-          <div className="flex-1 text-center font-mono text-[10px] text-bone/40 tracking-wide">
-            teeforce.golf / walkup-waitlist
-          </div>
-          <div className="flex items-center gap-1.5">
-            <div className="w-1.5 h-1.5 rounded-full bg-brass animate-[pulse-dot_2s_ease-in-out_infinite]" />
-            <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-bone/50">
-              Live
-            </span>
-          </div>
-        </div>
-        <div className="p-6">
-          <div className="flex items-baseline justify-between mb-6">
-            <div
-              className="font-display text-2xl text-bone"
-              style={{ fontVariationSettings: '"opsz" 32, "wght" 460' }}
-            >
-              Walkup waitlist
-            </div>
-            <div className="font-mono text-[9px] uppercase tracking-[0.22em] text-bone/40">
-              Thu · 11 Apr
-            </div>
-          </div>
-          <div className="grid grid-cols-2 gap-5">
-            <div>
-              <div className="font-mono text-[9px] uppercase tracking-[0.25em] text-brass mb-3 flex items-center gap-2">
-                <span className="h-px w-4 bg-brass/50" />
-                Openings
-              </div>
-              <div className="space-y-2">
-                {openings.map((o) => (
-                  <div
-                    key={o.time}
-                    className="flex items-center justify-between border border-brass/30 bg-brass/[0.05] px-3 py-2.5 font-mono text-[11px]"
-                  >
-                    <span className="text-bone/90">{o.time}</span>
-                    <span className="text-brass">×{o.party}</span>
-                  </div>
-                ))}
-                <div className="flex items-center gap-2 px-3 py-2 border border-dashed border-bone/15 font-mono text-[10px] text-bone/30">
-                  + post opening
-                </div>
-              </div>
-            </div>
-            <div>
-              <div className="font-mono text-[9px] uppercase tracking-[0.25em] text-brass mb-3 flex items-center gap-2">
-                <span className="h-px w-4 bg-brass/50" />
-                Queue
-              </div>
-              <div className="space-y-2">
-                {queue.map((g, i) => (
-                  <div
-                    key={g.name}
-                    className="flex items-center gap-3 border border-bone/10 bg-bone/[0.02] px-3 py-2.5 font-mono text-[11px]"
-                  >
-                    <span className="text-bone/40 text-[9px] w-3">{i + 1}</span>
-                    <span className="flex-1 text-bone/85 truncate">{g.name}</span>
-                    <span className="text-bone/50">×{g.party}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-          <div className="mt-6 flex items-center justify-between border-t border-bone/10 pt-4 font-mono text-[9px] uppercase tracking-[0.22em] text-bone/40">
-            <span>3 waiting</span>
-            <span className="text-brass/80">◆ Auto-notify on</span>
-          </div>
-        </div>
-      </div>
-      <div className="absolute -top-4 -right-4 bg-brass text-forest-abyss px-4 py-2 font-mono text-[10px] uppercase tracking-[0.2em] shadow-xl">
-        Available now
-      </div>
-    </div>
   )
 }
 
@@ -336,23 +286,6 @@ function Problem() {
 }
 
 function HowItWorks() {
-  const steps = [
-    {
-      n: 'I',
-      title: 'Golfer scans a QR code',
-      body: "A QR code at the pro shop or clubhouse. Golfers scan it with their phone, enter name, party size, and number. Done — they're on the list.",
-    },
-    {
-      n: 'II',
-      title: 'Operator posts an opening',
-      body: 'When a tee time opens up — cancellation, no-show, or a gap in the sheet — the operator posts it in Teeforce. One tap.',
-    },
-    {
-      n: 'III',
-      title: 'Next golfer gets a text',
-      body: "The next person on the waitlist gets an automatic text. They tap to claim the slot. If they don't respond, it rolls to the next person.",
-    },
-  ]
   return (
     <section id="how" className="bg-forest-abyss py-32 px-8 relative">
       <div className="max-w-[1400px] mx-auto">
@@ -369,22 +302,23 @@ function HowItWorks() {
           Three steps.{' '}
           <span className="italic text-brass-bright">No app required.</span>
         </h2>
-        <div className="grid md:grid-cols-3 gap-12">
-          {steps.map((step, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: i * 0.15 }}
-              className="relative pt-12"
-            >
+
+        <div className="space-y-24">
+          {/* Step 1 — with QR sign screenshot */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="grid md:grid-cols-2 gap-12 items-center"
+          >
+            <div className="relative pt-12">
               <div className="absolute top-0 left-0 right-0 flex items-center gap-3">
                 <div
                   className="font-display text-brass text-2xl"
                   style={{ fontVariationSettings: '"opsz" 32, "wght" 420' }}
                 >
-                  {step.n}
+                  I
                 </div>
                 <div className="flex-1 h-px bg-bone/15" />
               </div>
@@ -392,11 +326,89 @@ function HowItWorks() {
                 className="font-display text-3xl mb-4 mt-6 text-bone"
                 style={{ fontVariationSettings: '"opsz" 48, "wght" 450, "SOFT" 60, "WONK" 1' }}
               >
-                {step.title}
+                Golfer scans a QR code
               </h3>
-              <p className="text-bone/55 leading-relaxed">{step.body}</p>
-            </motion.div>
-          ))}
+              <p className="text-bone/55 leading-relaxed">
+                A QR code at the pro shop or clubhouse. Golfers scan it with their phone, enter name, party size, and number. Done — they're on the list.
+              </p>
+            </div>
+            <div className="flex justify-center md:justify-end">
+              <div className="max-w-xs border border-bone/15 rounded-sm shadow-[0_20px_60px_-15px_rgba(0,0,0,0.5)] overflow-hidden">
+                <img
+                  src="/screenshots/qr-sign.jpeg"
+                  alt="QR code sign for walkup waitlist"
+                  className="w-full h-auto"
+                />
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Step 2 — text only */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.15 }}
+            className="max-w-xl relative pt-12"
+          >
+            <div className="absolute top-0 left-0 right-0 flex items-center gap-3">
+              <div
+                className="font-display text-brass text-2xl"
+                style={{ fontVariationSettings: '"opsz" 32, "wght" 420' }}
+              >
+                II
+              </div>
+              <div className="flex-1 h-px bg-bone/15" />
+            </div>
+            <h3
+              className="font-display text-3xl mb-4 mt-6 text-bone"
+              style={{ fontVariationSettings: '"opsz" 48, "wght" 450, "SOFT" 60, "WONK" 1' }}
+            >
+              Operator posts an opening
+            </h3>
+            <p className="text-bone/55 leading-relaxed">
+              When a tee time opens up — cancellation, no-show, or a gap in the sheet — the operator posts it in Teeforce. One tap.
+            </p>
+          </motion.div>
+
+          {/* Step 3 — with join form screenshot */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+            className="grid md:grid-cols-2 gap-12 items-center"
+          >
+            <div className="relative pt-12">
+              <div className="absolute top-0 left-0 right-0 flex items-center gap-3">
+                <div
+                  className="font-display text-brass text-2xl"
+                  style={{ fontVariationSettings: '"opsz" 32, "wght" 420' }}
+                >
+                  III
+                </div>
+                <div className="flex-1 h-px bg-bone/15" />
+              </div>
+              <h3
+                className="font-display text-3xl mb-4 mt-6 text-bone"
+                style={{ fontVariationSettings: '"opsz" 48, "wght" 450, "SOFT" 60, "WONK" 1' }}
+              >
+                Next golfer gets a text
+              </h3>
+              <p className="text-bone/55 leading-relaxed">
+                The next person on the waitlist gets an automatic text. They tap to claim the slot. If they don't respond, it rolls to the next person.
+              </p>
+            </div>
+            <div className="flex justify-center md:justify-end">
+              <div className="max-w-[220px] border border-bone/15 rounded-sm shadow-[0_20px_60px_-15px_rgba(0,0,0,0.5)] overflow-hidden">
+                <img
+                  src="/screenshots/join-form.jpeg"
+                  alt="Golfer joining the waitlist on their phone"
+                  className="w-full h-auto"
+                />
+              </div>
+            </div>
+          </motion.div>
         </div>
       </div>
     </section>
