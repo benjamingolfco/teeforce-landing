@@ -1,0 +1,208 @@
+- main [ref=e3]:
+  - generic [ref=e5]:
+    - link "teeforce" [ref=e6] [cursor=pointer]:
+      - /url: "#"
+      - generic [ref=e8]: teeforce
+    - navigation [ref=e10]:
+      - link "Features" [ref=e11] [cursor=pointer]:
+        - /url: "#features"
+      - link "How It Works" [ref=e12] [cursor=pointer]:
+        - /url: "#how"
+    - link "Try It Now" [ref=e13] [cursor=pointer]:
+      - /url: "#waitlist"
+      - text: Try It Now
+  - generic [ref=e19]:
+    - generic [ref=e20]:
+      - generic [ref=e23]: Now in Early Access
+      - heading "Never lose a tee time to a no-show again." [level=1] [ref=e24]:
+        - text: Never lose a tee time
+        - text: to a no-show again.
+      - paragraph [ref=e25]: Teeforce is the modern course management platform with automatic waitlist filling, Square integration, and everything you need to run your course. The walkup waitlist is live now — try it today.
+      - generic [ref=e26]:
+        - link "Try the Walkup Waitlist →" [ref=e27] [cursor=pointer]:
+          - /url: "#waitlist"
+          - text: Try the Walkup Waitlist
+          - generic [ref=e28]: →
+        - link "See what we're building ↓" [ref=e29] [cursor=pointer]:
+          - /url: "#features"
+    - generic [ref=e31]:
+      - generic [ref=e32]:
+        - generic [ref=e33]:
+          - generic [ref=e38]: teeforce.golf / walkup-waitlist
+          - generic [ref=e41]: Live
+        - generic [ref=e42]:
+          - generic [ref=e43]:
+            - generic [ref=e44]: Walkup waitlist
+            - generic [ref=e45]: Thu · 11 Apr
+          - generic [ref=e46]:
+            - generic [ref=e47]:
+              - generic [ref=e48]: Openings
+              - generic [ref=e50]:
+                - generic [ref=e51]:
+                  - generic [ref=e52]: 2:30 PM
+                  - generic [ref=e53]: ×2
+                - generic [ref=e54]:
+                  - generic [ref=e55]: 3:00 PM
+                  - generic [ref=e56]: ×4
+                - generic [ref=e57]: + post opening
+            - generic [ref=e58]:
+              - generic [ref=e59]: Queue
+              - generic [ref=e61]:
+                - generic [ref=e62]:
+                  - generic [ref=e63]: "1"
+                  - generic [ref=e64]: Mike Thompson
+                  - generic [ref=e65]: ×2
+                - generic [ref=e66]:
+                  - generic [ref=e67]: "2"
+                  - generic [ref=e68]: Sarah Kim
+                  - generic [ref=e69]: ×4
+                - generic [ref=e70]:
+                  - generic [ref=e71]: "3"
+                  - generic [ref=e72]: Dan Reeves
+                  - generic [ref=e73]: ×3
+          - generic [ref=e74]:
+            - generic [ref=e75]: 3 waiting
+            - generic [ref=e76]: ◆ Auto-notify on
+      - generic [ref=e77]: Available now
+  - generic [ref=e79]:
+    - generic [ref=e82]: The Problem
+    - heading "Full course, walkup golfers, no good options." [level=2] [ref=e83]
+    - paragraph [ref=e84]: Every course deals with this. Most handle it with a clipboard or a "come back later."
+    - generic [ref=e85]:
+      - generic [ref=e86]:
+        - generic [ref=e87]: "01"
+        - generic [ref=e88]:
+          - heading "Walkups get turned away" [level=3] [ref=e89]
+          - paragraph [ref=e90]: A group shows up ready to play but the sheet looks full. Without a waitlist, they leave — and that's revenue walking out the door.
+      - generic [ref=e91]:
+        - generic [ref=e92]: "02"
+        - generic [ref=e93]:
+          - heading "No-shows leave empty slots" [level=3] [ref=e94]
+          - paragraph [ref=e95]: Industry data shows 9–18% of tee times go unfilled from no-shows and cancellations. Those slots could go to the walkup golfers you just sent home.
+      - generic [ref=e96]:
+        - generic [ref=e97]: "03"
+        - generic [ref=e98]:
+          - heading "Staff are playing waitlist coordinator" [level=3] [ref=e99]
+          - paragraph [ref=e100]: Taking names, checking the sheet, calling people back — your pro shop staff has better things to do than manage a clipboard.
+  - generic [ref=e102]:
+    - generic [ref=e105]: How It Works
+    - heading "Three steps. No app required." [level=2] [ref=e106]
+    - generic [ref=e107]:
+      - generic [ref=e108]:
+        - generic [ref=e110]: I
+        - heading "Golfer scans a QR code" [level=3] [ref=e112]
+        - paragraph [ref=e113]: A QR code at the pro shop or clubhouse. Golfers scan it with their phone, enter name, party size, and number. Done — they're on the list.
+      - generic [ref=e114]:
+        - generic [ref=e116]: II
+        - heading "Operator posts an opening" [level=3] [ref=e118]
+        - paragraph [ref=e119]: When a tee time opens up — cancellation, no-show, or a gap in the sheet — the operator posts it in Teeforce. One tap.
+      - generic [ref=e120]:
+        - generic [ref=e122]: III
+        - heading "Next golfer gets a text" [level=3] [ref=e124]
+        - paragraph [ref=e125]: The next person on the waitlist gets an automatic text. They tap to claim the slot. If they don't respond, it rolls to the next person.
+  - generic [ref=e127]:
+    - generic [ref=e130]: The mechanic, in motion
+    - generic [ref=e132]:
+      - generic [ref=e133]:
+        - generic [ref=e134]:
+          - generic [ref=e137]: Tee sheet · Live · Thu · 11 Apr
+          - generic [ref=e138]: teeforce.golf
+        - generic [ref=e139]:
+          - generic [ref=e140]:
+            - generic [ref=e141]: 7:00
+            - generic [ref=e143]:
+              - text: Johnson
+              - generic [ref=e144]: · (4)
+            - generic [ref=e145]: booked
+          - generic [ref=e146]:
+            - generic [ref=e147]: 7:08
+            - generic [ref=e149]:
+              - text: Martinez
+              - generic [ref=e150]: · (3)
+            - generic [ref=e151]: booked
+          - generic [ref=e152]:
+            - generic [ref=e153]: 7:16
+            - generic [ref=e155]:
+              - text: Park
+              - generic [ref=e156]: · (2)
+            - generic [ref=e157]: booked
+          - generic [ref=e158]:
+            - generic [ref=e159]: 7:24
+            - generic [ref=e161]:
+              - text: Reyes
+              - generic [ref=e162]: · (4)
+            - generic [ref=e163]: booked
+          - generic [ref=e164]:
+            - generic [ref=e165]: 7:32
+            - generic [ref=e167]: —
+            - generic [ref=e168]: open
+          - generic [ref=e169]:
+            - generic [ref=e170]: 7:40
+            - generic [ref=e172]:
+              - text: Chen
+              - generic [ref=e173]: · (2)
+            - generic [ref=e174]: booked
+      - generic [ref=e175]: 06:47 AM
+  - generic [ref=e177]:
+    - generic [ref=e180]: The Platform
+    - heading "One platform. Everything you need." [level=2] [ref=e181]
+    - paragraph [ref=e182]: Built specifically for golf course operations — not adapted from generic booking software.
+    - generic [ref=e184]:
+      - generic [ref=e185]:
+        - generic [ref=e187]: Available now
+        - heading "Walkup waitlist & automatic notifications" [level=3] [ref=e189]
+        - paragraph [ref=e190]: Golfers scan a QR code to join the waitlist. When a tee time opens up, the next person gets a text automatically. No clipboard, no phone calls, no chasing people down in the parking lot. Works alongside your existing tee sheet — no integration required.
+      - generic [ref=e191]:
+        - generic [ref=e192]:
+          - generic [ref=e193]: 9–18%
+          - generic [ref=e194]: industry no-show rate
+          - generic [ref=e195]: 10M+ rounds studied
+        - generic [ref=e196]:
+          - generic [ref=e197]: $140K+
+          - generic [ref=e198]: annual revenue at risk
+          - generic [ref=e199]: 40K rounds, foreUP
+        - generic [ref=e200]:
+          - generic [ref=e201]: ~45%
+          - generic [ref=e202]: per-round revenue beyond green fees
+          - generic [ref=e203]: Noteefy
+        - generic [ref=e204]:
+          - generic [ref=e205]: "0"
+          - generic [ref=e206]: staff effort to manage
+          - generic [ref=e207]: hands-off
+    - generic [ref=e208]:
+      - generic [ref=e209]:
+        - generic [ref=e210]:
+          - generic [ref=e211]: I
+          - generic [ref=e212]: Coming soon
+        - heading "Modern tee sheet" [level=3] [ref=e213]
+        - paragraph [ref=e214]: Fast, intuitive tee time management. Drag-and-drop scheduling, instant search, and a clean interface your staff can learn in minutes.
+      - generic [ref=e215]:
+        - generic [ref=e216]:
+          - generic [ref=e217]: II
+          - generic [ref=e218]: Coming soon
+        - heading "Square integration" [level=3] [ref=e219]
+        - paragraph [ref=e220]: Keep your Square POS for payments, grill and bar tabs, and inventory. Teeforce syncs with it seamlessly — no rip and replace.
+      - generic [ref=e221]:
+        - generic [ref=e222]:
+          - generic [ref=e223]: III
+          - generic [ref=e224]: Coming soon
+        - heading "Course analytics" [level=3] [ref=e225]
+        - paragraph [ref=e226]: See demand patterns, no-show trends, and revenue insights. Know when your course is busiest and where you're leaving money on the table.
+    - paragraph [ref=e227]: We're building Teeforce with input from real course operators. Get early access and help shape what comes next.
+  - generic [ref=e230]:
+    - generic [ref=e233]: Try It Now
+    - heading "The walkup waitlist is live — get started today." [level=2] [ref=e235]
+    - paragraph [ref=e236]: Set it up in minutes, no integration required. Works alongside whatever you're already using. Be one of the first courses on Teeforce and help shape the full platform.
+    - generic [ref=e237]:
+      - textbox "your@course.com" [ref=e238]
+      - button "Get Early Access" [ref=e239]
+    - paragraph [ref=e240]: No spam, no commitment. We'll get you set up and keep you in the loop as we build.
+  - generic [ref=e242]:
+    - generic [ref=e243]:
+      - generic [ref=e245]: teeforce
+      - generic [ref=e247]: © 2026 · A Benjamin Golf Co. product
+    - generic [ref=e248]:
+      - link "benjamingolfco.com" [ref=e249] [cursor=pointer]:
+        - /url: https://benjamingolfco.com
+      - link "info@teeforce.golf" [ref=e250] [cursor=pointer]:
+        - /url: mailto:info@teeforce.golf
