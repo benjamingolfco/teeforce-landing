@@ -60,10 +60,80 @@ function ComingSoonPage() {
     <>
       <ComingSoonNav />
       <ComingSoonHero />
-      <Problem />
+      <ComingSoonProblem />
       <CompactFeatures />
       <Footer />
     </>
+  )
+}
+
+function ComingSoonProblem() {
+  const items = [
+    {
+      n: '01',
+      title: 'Five disconnected tools',
+      body: 'Tee sheet here, POS there, inventory somewhere else. You toggle between platforms instead of running a course.',
+    },
+    {
+      n: '02',
+      title: 'Revenue lost to no-shows',
+      body: "Cancellations and no-shows leave holes in your schedule. By the time staff notices, it's too late to fill them.",
+    },
+    {
+      n: '03',
+      title: 'Software from 2009',
+      body: 'Clunky interfaces, slow performance, days of staff training. Your software should work for you — not the other way around.',
+    },
+  ]
+  return (
+    <section className="bg-forest-pale text-ink py-32 px-8 relative grain">
+      <div className="max-w-[1400px] mx-auto">
+        <div className="flex items-center gap-4 mb-12">
+          <div className="h-px w-12 bg-ink/40" />
+          <span className="text-[10px] uppercase tracking-[0.3em] text-ink/60 font-mono">
+            The Problem
+          </span>
+        </div>
+        <h2
+          className="font-display text-5xl md:text-7xl lg:text-[7rem] leading-[0.9] max-w-5xl mb-8 text-balance"
+          style={{ fontVariationSettings: '"opsz" 144, "wght" 350, "SOFT" 80, "WONK" 1' }}
+        >
+          Running a course shouldn't mean running{' '}
+          <span className="italic">five systems.</span>
+        </h2>
+        <p className="max-w-2xl text-lg text-ink/60 leading-relaxed mb-24 text-pretty">
+          Most course software was built a decade ago and it shows. You deserve better.
+        </p>
+        <div className="grid md:grid-cols-3 gap-16">
+          {items.map((item, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.8, delay: i * 0.15 }}
+              className="relative"
+            >
+              <div
+                className="font-display text-[8rem] leading-none text-ink/[0.08] absolute -top-16 -left-2 select-none"
+                style={{ fontVariationSettings: '"opsz" 144, "wght" 400' }}
+              >
+                {item.n}
+              </div>
+              <div className="relative pt-12 border-t border-ink/20">
+                <h3
+                  className="font-display text-2xl mb-4"
+                  style={{ fontVariationSettings: '"opsz" 32, "wght" 520' }}
+                >
+                  {item.title}
+                </h3>
+                <p className="text-ink/60 leading-relaxed">{item.body}</p>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
   )
 }
 
@@ -182,8 +252,7 @@ function ComingSoonHero() {
             transition={{ duration: 1, delay: 0.9 }}
             className="mt-8 max-w-xl text-lg text-bone/70 leading-relaxed text-pretty"
           >
-            Teeforce is the modern course management platform with automatic waitlist filling, Square integration, and everything you need to run your course.{' '}
-            <span className="text-bone">The walkup waitlist is live now — try it today.</span>
+            A modern tee sheet, Square-integrated POS, and smart course operations — built for the way you actually run your course.
           </motion.p>
 
           <motion.form
@@ -255,28 +324,20 @@ function ComingSoonHero() {
 function CompactFeatures() {
   const features = [
     {
-      title: 'Walkup waitlist & auto-notify',
-      body: 'Golfers join via QR code, get texted automatically when a slot opens. No clipboard, no callbacks.',
-      badge: 'Available now',
-      available: true,
-    },
-    {
       title: 'Modern tee sheet',
       body: 'A clean, fast tee sheet built for how courses actually operate. Drag, drop, done.',
-      badge: 'Coming soon',
-      available: false,
     },
     {
       title: 'Square integration',
       body: 'POS, payments, and inventory connected to your tee sheet. One system, no double-entry.',
-      badge: 'Coming soon',
-      available: false,
+    },
+    {
+      title: 'Cancellation filling',
+      body: 'When a slot opens up, the next person on the waitlist gets a text automatically. No-shows become revenue.',
     },
     {
       title: 'Course analytics',
       body: 'Utilization, revenue, no-show rates — the numbers you need to run a tighter operation.',
-      badge: 'Coming soon',
-      available: false,
     },
   ]
 
@@ -304,21 +365,8 @@ function CompactFeatures() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.7, delay: i * 0.1 }}
-              className={`border p-6 ${
-                feat.available
-                  ? 'border-brass/40 bg-brass/[0.04]'
-                  : 'border-bone/10 opacity-70'
-              }`}
+              className="border border-bone/10 p-6 hover:border-brass/30 transition-colors"
             >
-              <span
-                className={`inline-block text-[10px] uppercase tracking-[0.2em] font-mono px-3 py-1 mb-5 ${
-                  feat.available
-                    ? 'bg-ember text-forest-abyss'
-                    : 'text-bone/50 border border-bone/20'
-                }`}
-              >
-                {feat.badge}
-              </span>
               <h3
                 className="font-display text-xl mb-3 text-bone"
                 style={{ fontVariationSettings: '"opsz" 32, "wght" 480' }}
