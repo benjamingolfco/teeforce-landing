@@ -645,20 +645,32 @@ function HowItWorks() {
               </p>
             </div>
             <div className="flex justify-center md:justify-end gap-6">
-              <div className="max-w-[200px] border border-bone/15 rounded-sm shadow-[0_20px_60px_-15px_rgba(0,0,0,0.5)] overflow-hidden">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.3 }}
+                className="max-w-[200px] border border-bone/15 rounded-sm shadow-[0_20px_60px_-15px_rgba(0,0,0,0.5)] overflow-hidden"
+              >
                 <img
                   src="/screenshots/qr-sign.jpeg"
                   alt="QR code sign — scan to join"
                   className="w-full h-auto"
                 />
-              </div>
-              <div className="max-w-[160px] border border-bone/15 rounded-sm shadow-[0_20px_60px_-15px_rgba(0,0,0,0.5)] overflow-hidden">
+              </motion.div>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.5 }}
+                className="max-w-[160px] border border-bone/15 rounded-sm shadow-[0_20px_60px_-15px_rgba(0,0,0,0.5)] overflow-hidden"
+              >
                 <img
                   src="/screenshots/join-form.jpeg"
                   alt="Golfer filling out the waitlist form on their phone"
                   className="w-full h-auto"
                 />
-              </div>
+              </motion.div>
             </div>
           </motion.div>
 
@@ -691,13 +703,19 @@ function HowItWorks() {
               </p>
             </div>
             <div className="flex justify-center md:justify-end">
-              <div className="border border-bone/15 rounded-sm shadow-[0_20px_60px_-15px_rgba(0,0,0,0.5)] overflow-hidden">
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.7, delay: 0.3 }}
+                className="border border-bone/15 rounded-sm shadow-[0_20px_60px_-15px_rgba(0,0,0,0.5)] overflow-hidden"
+              >
                 <img
                   src="/screenshots/post-opening.jpeg"
                   alt="Operator posting a tee time opening in Teeforce"
                   className="w-full h-auto"
                 />
-              </div>
+              </motion.div>
             </div>
           </motion.div>
 
@@ -729,9 +747,15 @@ function HowItWorks() {
                 The next person on the waitlist gets an automatic text. They tap to claim the slot. If they don't respond, it rolls to the next person.
               </p>
             </div>
-            <div className="flex justify-center md:justify-end">
+            <motion.div
+              initial={{ opacity: 0, y: -20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.4, ease: [0.34, 1.56, 0.64, 1] }}
+              className="flex justify-center md:justify-end"
+            >
               <SmsBubble />
-            </div>
+            </motion.div>
           </motion.div>
         </div>
       </div>
