@@ -1,5 +1,5 @@
-import { useEffect, useRef, useState } from 'react'
-import { motion, useInView, AnimatePresence } from 'motion/react'
+import { useEffect, useState } from 'react'
+import { motion } from 'motion/react'
 import Lenis from 'lenis'
 
 const HERO_IMG =
@@ -47,7 +47,7 @@ function FullLandingPage() {
       <Hero />
       <Problem />
       <HowItWorks />
-      <VisualDemo />
+
       <Features />
       <Waitlist />
       <Footer />
@@ -787,190 +787,6 @@ function SmsBubble() {
         </div>
       </div>
     </div>
-  )
-}
-
-type SlotStatus = 'booked' | 'open' | 'cancelled' | 'filled'
-type Slot = { time: string; name: string; party: number; status: SlotStatus }
-type Phase = 'idle' | 'cancel' | 'notify' | 'fill' | 'done'
-
-const INITIAL_SLOTS: Slot[] = [
-  { time: '7:00', name: 'Johnson', party: 4, status: 'booked' },
-  { time: '7:08', name: 'Martinez', party: 3, status: 'booked' },
-  { time: '7:16', name: 'Park', party: 2, status: 'booked' },
-  { time: '7:24', name: 'Reyes', party: 4, status: 'booked' },
-  { time: '7:32', name: '—', party: 0, status: 'open' },
-  { time: '7:40', name: 'Chen', party: 2, status: 'booked' },
-]
-
-function VisualDemo() {
-  return (
-    <section className="relative py-24 px-8 bg-forest-abyss border-t border-bone/10">
-      <div className="max-w-4xl mx-auto">
-        <div className="flex items-center justify-center gap-4 mb-10">
-          <div className="h-px w-12 bg-brass/50" />
-          <span className="text-[10px] uppercase tracking-[0.3em] text-brass/70 font-mono">
-            The mechanic, in motion
-          </span>
-          <div className="h-px w-12 bg-brass/50" />
-        </div>
-        <TeeSheet />
-      </div>
-    </section>
-  )
-}
-
-function TeeSheet() {
-  const ref = useRef<HTMLDivElement>(null)
-  const inView = useInView(ref, { amount: 0.4 })
-  const [slots, setSlots] = useState<Slot[]>(INITIAL_SLOTS)
-  const [phase, setPhase] = useState<Phase>('idle')
-  const [loopKey, setLoopKey] = useState(0)
-
-  useEffect(() => {
-    if (!inView) return
-    const timers: number[] = []
-    setSlots(INITIAL_SLOTS)
-    setPhase('idle')
-
-    timers.push(
-      window.setTimeout(() => {
-        setPhase('cancel')
-        setSlots((s) =>
-          s.map((x, i) => (i === 2 ? { ...x, status: 'cancelled' } : x)),
-        )
-      }, 1400),
-    )
-    timers.push(window.setTimeout(() => setPhase('notify'), 2700))
-    timers.push(
-      window.setTimeout(() => {
-        setPhase('fill')
-        setSlots((s) =>
-          s.map((x, i) =>
-            i === 2
-              ? { time: '7:16', name: 'Wilson', party: 2, status: 'filled' }
-              : x,
-          ),
-        )
-      }, 3900),
-    )
-    timers.push(window.setTimeout(() => setPhase('done'), 5100))
-    timers.push(window.setTimeout(() => setLoopKey((k) => k + 1), 9000))
-
-    return () => {
-      timers.forEach((t) => window.clearTimeout(t))
-    }
-  }, [inView, loopKey])
-
-  return (
-    <div ref={ref} className="relative">
-      <div className="relative bg-gradient-to-br from-forest-mid to-forest rounded-sm border border-bone/10 shadow-[0_40px_80px_-20px_rgba(0,0,0,0.6)] overflow-hidden">
-        <div className="flex items-center justify-between px-6 py-4 border-b border-bone/10 bg-black/20">
-          <div className="flex items-center gap-3">
-            <div className="w-2 h-2 rounded-full bg-brass animate-[pulse-dot_2s_ease-in-out_infinite]" />
-            <div className="font-mono text-[10px] uppercase tracking-[0.22em] text-bone/60">
-              Tee sheet · Live · Thu · 11 Apr
-            </div>
-          </div>
-          <div className="font-mono text-[10px] text-bone/40">teeforce.golf</div>
-        </div>
-
-        <div className="p-6 pb-24 font-mono text-sm">
-          {slots.map((slot, i) => (
-            <SlotRow key={i} slot={slot} isTarget={i === 2} phase={phase} />
-          ))}
-        </div>
-
-        <AnimatePresence>
-          {(phase === 'notify' || phase === 'fill' || phase === 'done') && (
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 20 }}
-              className="absolute bottom-6 left-6 right-6 border border-brass/30 bg-brass/10 backdrop-blur px-4 py-3 flex items-center gap-3"
-            >
-              <span className="text-brass">⚡</span>
-              <div className="flex-1 font-mono text-[11px] text-brass-bright leading-relaxed">
-                {phase === 'notify' &&
-                  'Opening posted · next on waitlist texted automatically…'}
-                {phase === 'fill' &&
-                  'Wilson confirmed · slot assigned · zero staff effort'}
-                {phase === 'done' &&
-                  'Revenue recovered without a single phone call'}
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </div>
-
-      <div className="absolute -top-4 -right-4 bg-brass text-forest-abyss px-4 py-2 font-mono text-[10px] uppercase tracking-[0.2em] shadow-xl">
-        06:47 AM
-      </div>
-    </div>
-  )
-}
-
-function SlotRow({
-  slot,
-  isTarget,
-  phase,
-}: {
-  slot: Slot
-  isTarget: boolean
-  phase: Phase
-}) {
-  const isActive =
-    isTarget && (phase === 'cancel' || phase === 'notify' || phase === 'fill' || phase === 'done')
-  return (
-    <motion.div
-      layout
-      className={`flex items-center gap-6 py-3 border-b border-bone/5 last:border-b-0 transition-colors ${
-        isActive ? 'bg-brass/5' : ''
-      }`}
-    >
-      <div className="w-14 text-bone/70">{slot.time}</div>
-      <div className="flex-1 flex items-center gap-3">
-        <motion.span
-          key={`${slot.name}-${slot.status}`}
-          initial={{ opacity: 0, x: -6 }}
-          animate={{ opacity: 1, x: 0 }}
-          className={
-            slot.status === 'cancelled'
-              ? 'line-through text-ember/70'
-              : slot.status === 'open'
-                ? 'text-bone/30'
-                : slot.status === 'filled'
-                  ? 'text-brass-bright'
-                  : 'text-bone/90'
-          }
-        >
-          {slot.name}
-          {slot.party > 0 && <span className="text-bone/40"> · ({slot.party})</span>}
-        </motion.span>
-        {slot.status === 'filled' && (
-          <motion.span
-            initial={{ opacity: 0, scale: 0.85 }}
-            animate={{ opacity: 1, scale: 1 }}
-            className="text-[9px] uppercase tracking-[0.2em] text-brass border border-brass/40 px-1.5 py-0.5"
-          >
-            ← from waitlist
-          </motion.span>
-        )}
-      </div>
-      <div
-        className={`text-[9px] uppercase tracking-[0.2em] px-2 py-0.5 border ${
-          slot.status === 'booked'
-            ? 'border-bone/20 text-bone/50'
-            : slot.status === 'cancelled'
-              ? 'border-ember/40 text-ember'
-              : slot.status === 'filled'
-                ? 'border-brass text-brass bg-brass/10'
-                : 'border-bone/10 text-bone/30'
-        }`}
-      >
-        {slot.status}
-      </div>
-    </motion.div>
   )
 }
 
