@@ -6,7 +6,7 @@ const HERO_IMG =
   'https://images.unsplash.com/photo-1592919505780-303950717480?auto=format&fit=crop&w=2400&q=85'
 
 function useHash() {
-  const [hash, setHash] = useState(window.location.hash)
+  const [hash, setHash] = useState(typeof window !== 'undefined' ? window.location.hash : '')
   useEffect(() => {
     const onHashChange = () => setHash(window.location.hash)
     window.addEventListener('hashchange', onHashChange)
